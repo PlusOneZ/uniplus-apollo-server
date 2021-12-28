@@ -1,0 +1,25 @@
+{
+  "name": "apollo-server",
+  "version": "1.0.0",
+  "description": "Apollo server for uniplus backend",
+  "main": "src/index.js",
+  "scripts": {
+    "dev": "nodemon src/index",
+    "start": "node src/index"
+  },
+  "dependencies": {
+    "apollo-datasource-rest": "^0.11.0",
+    "apollo-server": "^3.0.0",
+    "eureka-js-client": "^4.5.0",
+    "graphql": "^15.5.1",
+    "ip": "^1.1.5"
+  },
+  "devDependencies": {
+    "dotenv": "^8.2.0",
+    "nodemon": "^2.0.4"
+  },
+  "keywords": [],
+  "author": "uniplus",
+  "license": "MIT",
+  "private": true
+}
