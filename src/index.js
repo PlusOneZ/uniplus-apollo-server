@@ -5,23 +5,25 @@ const resolvers = require('./resolvers');
 const TrackAPI = require('./datasources/track-api');
 const UserAPI = require('./datasources/user-api')
 
-const server = new ApolloServer({
-  typeDefs,
-  resolvers,
-  dataSources: () => {
-    return {
-      trackAPI: new TrackAPI(),
-      userAPI: new UserAPI()
-    };
-  },
-});
 
-server.listen().then(() => {
+async function startApolloServer(typeDefs, resolvers) {
+  const server = new ApolloServer({
+    typeDefs,
+    resolvers,
+    dataSources: () => {
+      return {
+        trackAPI: new TrackAPI(),
+        userAPI: new UserAPI()
+      };
+    },
+  });
+
+  const { url, port } = await server.listen({port: process.env.PORT || 4000});
   console.log(`
-    🚀  Server is running!
-    🔉  Listening on port 4000
-    📭  Query at https://studio.apollographql.com/dev
-  `);
-});
+      🚀  Server is running
+      🔉  Listening on port ${port}
+      📭  Query at ${url}
+    `);
+}
 
-let userAPI = new UserAPI()
+startApolloServer(typeDefs, resolvers);
