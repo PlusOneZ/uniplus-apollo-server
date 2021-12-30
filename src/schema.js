@@ -6,6 +6,8 @@ const typeDefs = gql`
     tracksForHome: [Track!]!
     track(id: ID!): Track
     user(id: ID!): User
+    post(id: ID!): Post
+    postArea(id: Int): Area
   }
   
   type Mutation {
@@ -78,6 +80,52 @@ const typeDefs = gql`
     role: Int
     "User's real name"
     realName: String
+  }
+  
+  "Uniplus Post Entity"
+  type Post {
+    "Identifier"
+    id: ID!
+    "Author's id"
+    author: User!
+    "Post send time"
+    postTime: String
+    "Post content"
+    content: String
+    "Post time"
+    title: String
+    "Post area"
+    areaId: Int
+    "Post likes count"
+    likeCount: Int
+    "Post Reply count"
+    replyCount: Int
+    "Post Replies"
+    replies: [Reply]
+  }
+  
+  "Post Replies"
+  type Reply {
+    "reply id"
+    id: ID!
+    "reply time"
+    time: String
+    "reply content"
+    content: String
+    "reply likes"
+    likeCount: Int
+    "reply author"
+    author: User!
+    "The reply id this reply is replying to"
+    parentId: ID!
+  }
+  
+  "Post area"
+  type Area {
+    "Area id, an integer"
+    id: Int!
+    "List of posts"
+    posts: [Post]!
   }
 `;
 

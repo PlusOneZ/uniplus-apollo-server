@@ -68,7 +68,7 @@ const client = registerWithEureka("apollo-server", 4000)
 exports.eurekaClient = client
 
 let gateway = {ip: null, observers: [] }
-let ownIp = null
+let ownIp = "http://" + "112.124.59.163" + ":31012/"
 
 Object.defineProperty(gateway, "ip", {
         configurable: false,

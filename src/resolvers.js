@@ -7,21 +7,15 @@ const resolvers = {
     track: (_, { id }, { dataSources }) => {
       return dataSources.trackAPI.getTrack(id);
     },
-    user: async (_, { id }, { dataSources }) => {
-      let temp = await dataSources.userAPI.getUser(id)
-      console.log(temp)
-      let user = {
-        id: temp.userId,
-        schoolId: temp.userSchoolId,
-        nickname: temp.userNickName,
-        phone: temp.userPhone,
-        createTime: temp.userCreateTime,
-        gender: temp.userGender ?  "女" : "男",
-        avatarLink: temp.userAvatarLink,
-        role: temp.userRole,
-        realName: temp.userRealName,
-      }
-      return user
+    user: (_, { id }, { dataSources }) => {
+      return dataSources.userAPI.getUser(id)
+    },
+    post: (_, { id }, { dataSources }) => {
+      console.log("post")
+      return  dataSources.postAPI.getPost(id)
+    },
+    postArea: (_, { id }, { dataSources }) => {
+      return dataSources.postAPI.getArea(id)
     }
   },
 
@@ -55,6 +49,16 @@ const resolvers = {
       return dataSources.trackAPI.getTrackModules(id)
     }
   },
+
+  Post: {
+    author: ({ authorId }, _, { dataSources }) => {
+      console.log("post author: ", authorId)
+      return dataSources.userAPI.getUser(authorId)
+    },
+    replies: ({ id }, _, { dataSources }) => {
+      return dataSources.postAPI.getReplyOfPost(id)
+    }
+  }
 };
 
 module.exports = resolvers;

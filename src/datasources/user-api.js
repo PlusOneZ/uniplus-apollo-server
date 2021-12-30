@@ -5,12 +5,23 @@ class UserAPI extends RESTDataSource {
     constructor() {
         super();
         // gateway.observers.push(this)
-        this.baseURL = "http://" + /*gatewayService[0].ipAddr*/ "112.124.59.163" + ":31012/";
+        this.baseURL = gateway.ip
     }
 
-    getUser(id) {
-        console.log(this.baseURL)
-        return this.get(`/api/v1/user/${id}`)
+    async getUser(id) {
+        let temp = await this.get(`/api/v1/user/${id}`)
+        let user = {
+            id: temp.userId,
+            schoolId: temp.userSchoolId,
+            nickname: temp.userNickName,
+            phone: temp.userPhone,
+            createTime: temp.userCreateTime,
+            gender: temp.userGender ?  "女" : "男",
+            avatarLink: temp.userAvatarLink,
+            role: temp.userRole,
+            realName: temp.userRealName,
+        }
+        return user
     }
 
     setUrl(url) {
@@ -18,8 +29,6 @@ class UserAPI extends RESTDataSource {
         this.baseURL = url
         console.log("this url", this.baseURL)
     }
-
-
 }
 
 module.exports = UserAPI

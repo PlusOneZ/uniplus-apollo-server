@@ -4,7 +4,7 @@ const resolvers = require('./resolvers');
 
 const TrackAPI = require('./datasources/track-api');
 const UserAPI = require('./datasources/user-api')
-
+const PostAPI = require('./datasources/post-api')
 
 async function startApolloServer(typeDefs, resolvers) {
   const server = new ApolloServer({
@@ -13,7 +13,8 @@ async function startApolloServer(typeDefs, resolvers) {
     dataSources: () => {
       return {
         trackAPI: new TrackAPI(),
-        userAPI: new UserAPI()
+        userAPI: new UserAPI(),
+        postAPI: new PostAPI()
       };
     },
   });
