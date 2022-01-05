@@ -59,7 +59,8 @@ class PostAPI extends RESTDataSource {
                 time: temp.replyTime,
                 content: temp.replyContent,
                 likeCount: temp.replyLikeCount,
-                author: temp.replyLikeCount,
+                authorId: temp.replyUserId,
+                postId: temp.replyPostId,
             })
         }
         return ret

@@ -58,6 +58,12 @@ const resolvers = {
     replies: ({ id }, _, { dataSources }) => {
       return dataSources.postAPI.getReplyOfPost(id)
     }
+  },
+
+  Reply: {
+    author: ({ authorId }, _, { dataSources }) => {
+      return dataSources.userAPI.getUser(authorId)
+    }
   }
 };
 
